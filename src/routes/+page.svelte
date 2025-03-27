@@ -5,7 +5,8 @@
 
   let { data } = $props();
   let carts = $state((data['carts'] as Cart[]) || []);
-
+  let products = $state(data['products'] || []);
+  
   function onAddToCart(product: Product) {
     carts.push({
       id: v4(),
@@ -13,20 +14,57 @@
     });
     localStorage.setItem('carts', JSON.stringify(carts));
   }
+
+  function sort(key: 'id' | 'name' | 'price') {
+    if (key === 'id' || key === 'price') products = products.sort((a, b) => a[key] - b[key]);
+    else products = products.sort((a, b) => {
+      const name1 = a[key].toUpperCase();
+      const name2 = b[key].toUpperCase();
+
+      if (name1 < name2) return -1;
+      else if (name1 > name2) return 1;
+      
+      return 0;
+    });
+  }
 </script>
 
 <PageTitle label="Product list" />
 <table class="border-collapse border border-gray-300">
   <thead>
     <tr>
-      <th class={cell}>ID</th>
-      <th class={cell}>Name</th>
-      <th class={cell}>Price</th>
+      <th class={cell}>
+        <span>ID</span>
+        <button
+          class="ml-1 cursor-pointer bg-gray-200 px-1 text-xs"
+          onclick={() => sort('id')}
+        >
+          sort
+        </button>
+      </th>
+      <th class={cell}>
+        <span>Name</span>
+        <button
+          class="cursor-pointer bg-gray-200 px-1 text-xs"
+          onclick={() => sort('name')}
+        >
+          sort
+        </button>
+      </th>
+      <th class={cell}>
+        <span>Price</span>
+        <button
+          class="cursor-pointer bg-gray-200 px-1 text-xs"
+          onclick={() => sort('price')}
+        >
+          sort
+        </button>
+      </th>
       <td class={cell}></td>
     </tr>
   </thead>
   <tbody>
-    {#each data['products'] || [] as product}
+    {#each products as product}
       <tr>
         <td class={cell}>{product.id}</td>
         <td class={`${cell} w-56`}>{product.name}</td>
