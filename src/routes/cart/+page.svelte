@@ -11,6 +11,7 @@
   }
 
   async function sendOrder() {
+    if (!confirm('Are you sure?')) return;
     await fetch('/cart', {
       method: 'post',
       body: JSON.stringify(carts),
@@ -24,6 +25,12 @@
 {#if carts.length === 0}
   <p>No data...</p>
 {:else}
+  <p>
+    Total amount: {carts
+      .map((v) => v.product.price)
+      .reduce((a, b) => a + b, 0)
+      .toLocaleString()}
+  </p>
   <table class="w-96 border-collapse border border-gray-300">
     <thead>
       <tr>
@@ -52,18 +59,13 @@
       {/each}
     </tbody>
   </table>
-  <p>
-    Total amount: {carts
-      .map((v) => v.product.price)
-      .reduce((a, b) => a + b, 0)
-      .toLocaleString()}
-  </p>
+
   <div class="mt-5">
     <button
       class="cursor-pointer rounded-md bg-amber-400 px-2 py-0.5 text-sm font-bold hover:bg-amber-300 disabled:bg-gray-500 disabled:text-gray-300"
       onclick={sendOrder}
     >
-      Order
+      Submit Order
     </button>
   </div>
 {/if}

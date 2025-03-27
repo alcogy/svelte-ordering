@@ -6,10 +6,16 @@
   const particulars = data['data'];
 </script>
 
-<PageTitle label="Order history" />
+<PageTitle label="Order detail" />
 {#if particulars === null || particulars.length === 0}
   <p>No data...</p>
 {:else}
+  <p>
+    Total amount: {particulars
+      .map((v) => v.product?.price || 0)
+      .reduce((a, b) => a + b, 0)
+      .toLocaleString()}
+  </p>
   <table class="w-96 border-collapse border border-gray-300">
     <thead>
       <tr>
@@ -29,12 +35,6 @@
       {/each}
     </tbody>
   </table>
-  <p>
-    Total amount: {particulars
-      .map((v) => v.product?.price || 0)
-      .reduce((a, b) => a + b, 0)
-      .toLocaleString()}
-  </p>
 {/if}
 <p class="mt-5">
   <a href="/history" class="text-blue-500 underline hover:text-blue-400">
