@@ -1,32 +1,29 @@
 <script lang="ts">
-  import { type Cart, cell } from '$lib/shared.js';
+  import { carts } from '$lib/store/appstore.js';
+  import { cell } from '$lib/shared.js';
   import PageTitle from '$lib/ui/page-title.svelte';
-
-  let { data } = $props();
-  let carts = $state((data['carts'] as Cart[]) || []);
-
+  
   function onRemoveFromCart(id: string) {
-    carts = carts.filter((v) => v.id !== id);
-    localStorage.setItem('carts', JSON.stringify(carts));
+    const newCarts = $carts.filter((v) => v.id !== id);
+    carts.set(newCarts);
   }
 
   async function sendOrder() {
     if (!confirm('Are you sure?')) return;
     await fetch('/cart', {
       method: 'post',
-      body: JSON.stringify(carts),
+      body: JSON.stringify($carts),
     });
-    carts = [];
-    localStorage.removeItem('carts');
+    carts.set([]);
   }
 </script>
 
 <PageTitle label="Cart" />
-{#if carts.length === 0}
+{#if $carts.length === 0}
   <p>No data...</p>
 {:else}
   <p>
-    Total amount: {carts
+    Total amount: {$carts
       .map((v) => v.product.price)
       .reduce((a, b) => a + b, 0)
       .toLocaleString()}
@@ -42,7 +39,7 @@
     </thead>
 
     <tbody>
-      {#each carts as cart}
+      {#each $carts as cart}
         <tr>
           <td class={cell}>{cart.product.id}</td>
           <td class={`${cell} w-56`}>{cart.product.name}</td>

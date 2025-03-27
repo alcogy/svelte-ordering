@@ -1,18 +1,19 @@
 <script lang="ts">
+  import { carts } from '$lib/store/appstore.js';
   import { type Product, type Cart, cell } from '$lib/shared.js';
   import { v4 } from 'uuid';
   import PageTitle from '$lib/ui/page-title.svelte';
 
   let { data } = $props();
-  let carts = $state((data['carts'] as Cart[]) || []);
   let products = $state(data['products'] || []);
   
   function onAddToCart(product: Product) {
-    carts.push({
+    const newCarts = [...$carts];
+    newCarts.push({
       id: v4(),
       product: product,
     });
-    localStorage.setItem('carts', JSON.stringify(carts));
+    carts.set(newCarts);
   }
 
   function sort(key: 'id' | 'name' | 'price') {
@@ -73,7 +74,7 @@
           <button
             class="cursor-pointer rounded-md bg-amber-400 px-2 py-0.5 text-sm font-bold hover:bg-amber-300 disabled:bg-gray-500 disabled:text-gray-300"
             onclick={() => onAddToCart(product)}
-            disabled={carts.map((v) => v.product.id).includes(product.id)}
+            disabled={$carts.map((v) => v.product.id).includes(product.id)}
           >
             Add to cart
           </button>
