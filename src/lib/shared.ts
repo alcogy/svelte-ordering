@@ -7,6 +7,7 @@ export interface Product {
 export interface Cart {
   id: string;
   product: Product;
+  quantity: number;
 }
 
-export const cell = 'border-b border-gray-300 py-2 px-3 text-left';
+export const cell = 'border-t border-gray-300 py-4 px-5 text-left';

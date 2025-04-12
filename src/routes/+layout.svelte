@@ -1,18 +1,32 @@
 <script lang="ts">
   import '../app.css';
 
+  const links = [
+    { path: '/', label: 'Home' },
+    { path: '/cart', label: 'Cart' },
+    { path: '/history', label: 'Order History' },
+  ]
+
   let { children } = $props();
 </script>
 
-<header class="flex h-12 items-center justify-between bg-orange-800 px-3">
-  <h1 class="text-xl font-bold text-white">Tiny Ordering</h1>
-  <ul class="flex gap-5">
-    <li class="text-white"><a href="/">Home</a></li>
-    <li class="text-white"><a href="cart">Cart</a></li>
-    <li class="text-white"><a href="history">Order History</a></li>
-  </ul>
+<div class="min-h-screen bg-gray-100">
+<header class="flex items-center justify-center shadow-sm">
+  <div class="flex h-14 items-center justify-between w-full max-w-[1280px]">
+    <h1 class="text-lg font-bold text-gray-600">Tiny Ordering</h1>
+    <ul class="flex gap-3">
+      {#each links as link}
+      <li>
+        <a href="{link.path}" class="text-gray-600 rounded-md px-2 py-1 hover:bg-gray-200">{link.label}</a>
+      </li>
+      {/each}
+    </ul>
+  </div>
 </header>
 
-<main class="flex flex-col items-center justify-center p-5">
-  {@render children()}
+<main class="flex flex-col items-center justify-center p-6 w-full">
+  <div class="w-full max-w-[1080px]">
+    {@render children()}
+  </div>
 </main>
+</div>
