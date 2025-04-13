@@ -39,7 +39,14 @@
           <td class={`${cell} w-40`}>{cart.product.id}</td>
           <td class={`${cell}`}>{cart.product.name}</td>
           <td class={`${cell} w-32 text-right`}>{cart.product.price}</td>
-          <td class={`${cell} w-24 text-right`}>{cart.quantity}</td>
+          <td class={`${cell} w-24 text-right`}>
+            <input
+              class="text-right px-1 border border-gray-300 rounded-md inset-shadow-lg"
+              type="number"
+              min="1" max="10"
+              bind:value={cart.quantity}
+            />
+          </td>
           <td class={`${cell} w-1`}>
             <button
               class="cursor-pointer text-nowrap rounded-md px-2 py-0.5 text-sm font-bold shadow hover:shadow-md disabled:bg-gray-200 disabled:text-gray-400 disabled:shadow-none disabled:cursor-auto"

@@ -19,6 +19,7 @@ export const actions = {
         const pd: typeof schema.particular.$inferInsert = {
           orderId: id,
           productId: v.product.id,
+          quantity: v.quantity,
           sort: i,
         };
         await db.insert(schema.particular).values(pd);

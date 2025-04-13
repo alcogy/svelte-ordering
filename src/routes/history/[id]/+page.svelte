@@ -27,7 +27,7 @@
           <td class={`${cell} w-40`}>{pt.product?.id}</td>
           <td class={`${cell}`}>{pt.product?.name}</td>
           <td class={`${cell}`}>{pt.product?.manufacturer}</td>
-          <td class={`${cell} w-32 text-right`}>{pt.product?.price}</td>
+          <td class={`${cell} w-32 text-right`}>€ {pt.product?.price.toLocaleString()}</td>
           <td class={`${cell} w-32 text-right`}>{pt.particular.quantity}</td>
         </tr>
       {/each}

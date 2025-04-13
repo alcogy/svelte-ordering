@@ -14,7 +14,8 @@
     <thead>
       <tr>
         <th class="py-4 px-5 text-left bg-gray-200 rounded-tl-lg">ID</th>
-        <th class="py-4 px-5 text-left bg-gray-200 rounded-tr-lg">Order date</th>
+        <th class="py-4 px-5 text-left bg-gray-200">Order date</th>
+        <th class="py-4 px-5 text-left bg-gray-200 rounded-tr-lg">Amount</th>
       </tr>
     </thead>
 
@@ -27,8 +28,11 @@
             </a>
           </td>
           <td class={`${cell}`}>
-            {history.orderedDate.toLocaleDateString()}
-            {history.orderedDate.toLocaleTimeString()}
+            {new Date(history.ordered_date as string).toLocaleDateString()}
+            {new Date(history.ordered_date as string).toLocaleTimeString()}
+          </td>
+          <td class={`${cell} w-32 text-right`}>
+            € {Number(history.amount).toLocaleString()}-
           </td>
         </tr>
       {/each}

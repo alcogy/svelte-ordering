@@ -11,7 +11,7 @@
 </script>
 
 <div class="min-h-screen bg-gray-100">
-<header class="flex items-center justify-center shadow-sm">
+<header class="flex items-center justify-center shadow-sm px-2">
   <div class="flex h-14 items-center justify-between w-full max-w-[1280px]">
     <h1 class="text-lg font-bold text-gray-600">Tiny Ordering</h1>
     <ul class="flex gap-3">
