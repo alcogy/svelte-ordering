@@ -1,6 +1,7 @@
 <script lang="ts">
   import { carts } from '$lib/store/appstore.js';
   import { cell } from '$lib/shared.js';
+  import { formatPrice } from '$lib';
   import PageTitle from '$lib/ui/page-title.svelte';
   
   function onRemoveFromCart(id: string) {
@@ -38,7 +39,7 @@
         <tr>
           <td class={`${cell} w-40`}>{cart.product.id}</td>
           <td class={`${cell}`}>{cart.product.name}</td>
-          <td class={`${cell} w-32 text-right`}>{cart.product.price}</td>
+          <td class={`${cell} w-32 text-right`}>{formatPrice(cart.product.price)}</td>
           <td class={`${cell} w-24 text-right`}>
             <input
               class="text-right px-1 border border-gray-300 rounded-md inset-shadow-lg"

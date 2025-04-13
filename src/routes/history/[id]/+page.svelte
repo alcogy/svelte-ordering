@@ -1,7 +1,8 @@
 <script lang="ts">
+  import { formatPrice } from '$lib';
   import { cell } from '$lib/shared.js';
   import PageTitle from '$lib/ui/page-title.svelte';
-
+  
   let { data } = $props();
   const particulars = data['data'];
 </script>
@@ -27,7 +28,7 @@
           <td class={`${cell} w-40`}>{pt.product?.id}</td>
           <td class={`${cell}`}>{pt.product?.name}</td>
           <td class={`${cell}`}>{pt.product?.manufacturer}</td>
-          <td class={`${cell} w-32 text-right`}>€ {pt.product?.price.toLocaleString()}</td>
+          <td class={`${cell} w-32 text-right`}>{formatPrice(pt.product?.price || 0)}</td>
           <td class={`${cell} w-32 text-right`}>{pt.particular.quantity}</td>
         </tr>
       {/each}
@@ -35,13 +36,11 @@
   </table>
   <div class="mt-3">
     <p>
-      Total amount:<span class="pl-3 text-lg font-bold">
-        €
-        {particulars
+      Total amount:<span class="pl-3 text-lg font-bold">{
+        formatPrice(particulars
         .map((v) => (v.product?.price || 0) * v.particular.quantity)
-        .reduce((a, b) => a + b, 0)
-        .toLocaleString()}
-        -</span>
+        .reduce((a, b) => a + b, 0))
+      }</span>
     </p>
   </div>
 {/if}

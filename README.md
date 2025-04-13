@@ -1,23 +1,22 @@
 # Tiny Ordering
 
-Tiny Ordering is a simple web order system. This system is build by Sveltekit.
+Tiny Ordering is a simple web order system.
 
-## Specs
+![screenshot](/readme/screen.png)
 
-### Pages
+Tiny Ordering is build by Sveltekit, drizzle ORM, Tailwind CSS and PostgreSQL.<br>
+We Implemnted few functions. Add and remove by cart and show order histories.
+
+## Pages
 
 - Product list
 - Cart
 - Order histories
 - Order detail
 
-### Tables
+## Main dependent libraries
 
-- Product
-- Order
-
-### Functions
-
-- Set to cart
-- Remove from cart
-- Create order
+- Sveltekit
+- TypeScript
+- drizzle
+- tailwindCSS
