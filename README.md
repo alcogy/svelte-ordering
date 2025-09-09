@@ -1,6 +1,6 @@
-# Tiny Ordering
+# Svelte Ordering
 
-Tiny Ordering is a simple web order system.
+Svelte Ordering is a simple web order system.
 
 ![screenshot](/readme/screen.png)
 
@@ -13,10 +13,3 @@ We Implemnted few functions. Add and remove by cart and show order histories.
 - Cart
 - Order histories
 - Order detail
-
-## Main dependent libraries
-
-- Sveltekit
-- TypeScript
-- drizzle
-- tailwindCSS
