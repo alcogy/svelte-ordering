@@ -1,6 +1,5 @@
 <script lang="ts">
   import { carts } from '$lib/store/appstore.js';
-  import { cell } from '$lib/shared.js';
   import { formatPrice } from '$lib';
   import PageTitle from '$lib/ui/page-title.svelte';
   
@@ -23,24 +22,24 @@
 {#if $carts.length === 0}
   <p>No data...</p>
 {:else}
-  <table class="border-collapse shadow-sm rounded-lg w-full">
+  <table>
     <thead>
       <tr>
-        <th class="py-4 px-5 text-left bg-gray-200 rounded-tl-lg">Product ID</th>
-        <th class="py-4 px-5 text-left bg-gray-200">Product name</th>
-        <th class="py-4 px-5 text-left bg-gray-200">Price</th>
-        <th class="py-4 px-5 text-left bg-gray-200">Quantity</th>
-        <td class="py-4 px-5 text-left bg-gray-200 rounded-tr-lg"></td>
+        <th>Product ID</th>
+        <th>Product name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
       </tr>
     </thead>
       
     <tbody>
       {#each $carts as cart}
         <tr>
-          <td class={`${cell} w-40`}>{cart.product.id}</td>
-          <td class={`${cell}`}>{cart.product.name}</td>
-          <td class={`${cell} w-32 text-right`}>{formatPrice(cart.product.price)}</td>
-          <td class={`${cell} w-24 text-right`}>
+          <td class={`w-40`}>{cart.product.id}</td>
+          <td>{cart.product.name}</td>
+          <td class={`w-32 text-right`}>{formatPrice(cart.product.price)}</td>
+          <td class={`w-24 text-right`}>
             <input
               class="text-right px-1 border border-gray-300 rounded-md inset-shadow-lg"
               type="number"
@@ -48,7 +47,7 @@
               bind:value={cart.quantity}
             />
           </td>
-          <td class={`${cell} w-1`}>
+          <td class={`çw-1`}>
             <button
               class="cursor-pointer text-nowrap rounded-md px-2 py-0.5 text-sm font-bold shadow hover:shadow-md disabled:bg-gray-200 disabled:text-gray-400 disabled:shadow-none disabled:cursor-auto"
               onclick={() => onRemoveFromCart(cart.id)}
@@ -72,7 +71,7 @@
     </p>
     <div class="mt-5">
       <button
-        class="cursor-pointer rounded-md shadow bg-amber-400 px-2 py-0.5 text-sm font-bold hover:bg-amber-300 disabled:bg-gray-500 disabled:text-gray-300"
+        class="submit"
         onclick={sendOrder}
       >
         Submit Order
@@ -80,3 +79,37 @@
     </div>
   </div>
 {/if}
+
+<style lang="scss">
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    & thead th {
+      padding: 16px 32px;
+      background-color: #e1e2e5;
+      &:first-of-type {
+        border-radius: 8px 0 0 0;
+      }
+      &:last-of-type {
+        border-radius: 0 8px 0 0;
+      }
+    }
+    & tbody td {
+      border-bottom: 1px solid #ccc;
+      padding: 16px 32px;
+      text-align: left;
+    }
+  }  
+  button.submit {
+    font-size: 0.84rem;
+    font-weight: 700; 
+    background-color: #ea0;
+    padding: 2px 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+</style>

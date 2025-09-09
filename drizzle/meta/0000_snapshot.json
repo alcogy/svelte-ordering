@@ -1,5 +1,5 @@
 {
-  "id": "0a3d6ff7-3703-4da9-89ea-9af3fb068f9a",
+  "id": "6abff418-f1e1-4012-bf22-b7235685bf2c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -49,6 +49,13 @@
         },
         "product_id": {
           "name": "product_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "quantity": {
+          "name": "quantity",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,

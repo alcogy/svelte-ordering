@@ -7,6 +7,7 @@ CREATE TABLE "particular" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"order_id" integer DEFAULT 0 NOT NULL,
 	"product_id" integer DEFAULT 0 NOT NULL,
+	"quantity" integer DEFAULT 0 NOT NULL,
 	"sort" integer DEFAULT 0 NOT NULL
 );
 --> statement-breakpoint
