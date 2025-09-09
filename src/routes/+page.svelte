@@ -21,34 +21,34 @@
 </script>
 
 <PageTitle label="Product list" />
-<table class="border-collapse shadow-sm rounded-lg w-full">
+<table class="main-table">
   <thead>
     <tr>
-      <th class="py-4 px-5 text-left bg-gray-200 rounded-tl-lg">
+      <th>
         <span>Product ID</span>
       </th>
-      <th class="py-4 px-5 text-left bg-gray-200">
+      <th>
         <span>Product name</span>
       </th>
-      <th class="py-4 px-5 text-left bg-gray-200">
+      <th>
         <span>Manufacturer</span>
       </th>
-      <th class="py-4 px-5 text-left bg-gray-200">
+      <th>
         <span>Price</span>
       </th>
-      <th class="py-4 px-5 text-left bg-gray-200 rounded-tr-lg"></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     {#each products as product}
       <tr>
-        <td class={`${cell} w-40`}>{product.id}</td>
-        <td class={`${cell}`}>{product.name}</td>
-        <td class={`${cell}`}>{product.manufacturer}</td>
-        <td class={`${cell} w-32 text-right`}>{formatPrice(product.price)}</td>
-        <td class={`${cell} w-1`}>
+        <td class="w-40">{product.id}</td>
+        <td>{product.name}</td>
+        <td>{product.manufacturer}</td>
+        <td class="w-32 text-right">{formatPrice(product.price)}</td>
+        <td class="w-1">
           <button
-            class="cursor-pointer text-nowrap rounded-md text-gray-600 px-2 py-0.5 text-sm font-bold shadow hover:shadow-md disabled:bg-gray-200 disabled:text-gray-400 disabled:shadow-none disabled:cursor-auto"
+            class="add-cart"
             onclick={() => onAddToCart(product)}
             disabled={$carts.map((v) => v.product.id).includes(product.id)}
           >
@@ -59,3 +59,26 @@
     {/each}
   </tbody>
 </table>
+
+<style lang="scss">
+  button.add-cart {
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    padding: 2px 5px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #444;
+    font-weight: 500;
+    
+    &:not(:disabled):hover {
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    &:disabled {
+      background-color: #ddd;
+      box-shadow: none;
+      color: #777;
+      
+    }
+  }
+</style>

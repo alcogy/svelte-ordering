@@ -2,4 +2,13 @@
   let { label } = $props();
 </script>
 
-<h2 class="mb-5 text-left text-2xl font-bold text-gray-600">{label}</h2>
+<h2>{label}</h2>
+
+<style lang="scss">
+  h2 {
+    margin-bottom: 24px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #333;
+  }
+</style>

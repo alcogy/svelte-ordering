@@ -1,6 +1,5 @@
 <script lang="ts">
   import { formatPrice } from '$lib';
-  import { cell } from '$lib/shared.js';
   import PageTitle from '$lib/ui/page-title.svelte';
   
   let { data } = $props();
@@ -11,25 +10,25 @@
 {#if particulars === null || particulars.length === 0}
   <p>No data...</p>
 {:else}
-  <table class="border-collapse shadow-sm rounded-lg w-full">
+  <table class="main-table">
     <thead>
       <tr>
-        <th class="py-4 px-5 text-left bg-gray-200 rounded-tl-lg">ID</th>
-        <th class="py-4 px-5 text-left bg-gray-200">Name</th>
-        <th class="py-4 px-5 text-left bg-gray-200">Manufacturer</th>
-        <th class="py-4 px-5 text-left bg-gray-200">Price</th>
-        <th class="py-4 px-5 text-left bg-gray-200 rounded-tr-lg">Quantity</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Manufacturer</th>
+        <th>Price</th>
+        <th>Quantity</th>
       </tr>
     </thead>
 
     <tbody>
       {#each particulars as pt}
         <tr>
-          <td class={`${cell} w-40`}>{pt.product?.id}</td>
-          <td class={`${cell}`}>{pt.product?.name}</td>
-          <td class={`${cell}`}>{pt.product?.manufacturer}</td>
-          <td class={`${cell} w-32 text-right`}>{formatPrice(pt.product?.price || 0)}</td>
-          <td class={`${cell} w-32 text-right`}>{pt.particular.quantity}</td>
+          <td class="w-40">{pt.product?.id}</td>
+          <td>{pt.product?.name}</td>
+          <td>{pt.product?.manufacturer}</td>
+          <td class="w-32 text-right">{formatPrice(pt.product?.price || 0)}</td>
+          <td class="w-32 text-right">{pt.particular.quantity}</td>
         </tr>
       {/each}
     </tbody>

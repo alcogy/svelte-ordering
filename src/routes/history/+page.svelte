@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cell } from '$lib/shared.js';
+  import { symbol } from '$lib';
   import PageTitle from '$lib/ui/page-title.svelte';
 
   let { data } = $props();
@@ -10,29 +10,29 @@
 {#if histories.length === 0}
   <p>No data...</p>
 {:else}
-  <table class="border-collapse shadow-sm rounded-lg w-full">
+  <table class="main-table">
     <thead>
       <tr>
-        <th class="py-4 px-5 text-left bg-gray-200 rounded-tl-lg">ID</th>
-        <th class="py-4 px-5 text-left bg-gray-200">Order date</th>
-        <th class="py-4 px-5 text-left bg-gray-200 rounded-tr-lg">Amount</th>
+        <th>ID</th>
+        <th>Order date</th>
+        <th>Amount</th>
       </tr>
     </thead>
 
     <tbody>
       {#each histories as history}
         <tr>
-          <td class={`${cell} w-40`}>
+          <td class="w-40">
             <a href={'./history/' + history.id} class="text-blue-500 underline">
               {history.id}
             </a>
           </td>
-          <td class={`${cell}`}>
+          <td>
             {new Date(history.ordered_date as string).toLocaleDateString()}
             {new Date(history.ordered_date as string).toLocaleTimeString()}
           </td>
-          <td class={`${cell} w-32 text-right`}>
-            € {Number(history.amount).toLocaleString()}-
+          <td class="w-32 text-right text-nowrap">
+            {symbol} {Number(history.amount).toLocaleString()}-
           </td>
         </tr>
       {/each}

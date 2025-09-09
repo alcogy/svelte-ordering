@@ -10,6 +10,7 @@ export const load: PageServerLoad = async ({ params }) => {
     .leftJoin(product, eq(particular.productId, product.id))
     .where(eq(particular.orderId, Number(params.id)))
     .orderBy(particular.sort);
+    
   return {
     data: data,
   };
