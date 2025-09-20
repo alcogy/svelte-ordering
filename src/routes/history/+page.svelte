@@ -23,7 +23,7 @@
       {#each histories as history}
         <tr>
           <td class="id">
-            <a href={'./history/' + history.id} class="text-blue-500 underline">
+            <a href={'./history/' + history.id}>
               {history.id}
             </a>
           </td>
@@ -39,3 +39,9 @@
     </tbody>
   </table>
 {/if}
+
+<style lang="scss">
+  td.id a {
+    color: #0af;
+  }
+</style>
