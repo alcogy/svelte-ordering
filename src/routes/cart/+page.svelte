@@ -1,8 +1,10 @@
 <script lang="ts">
   import { carts } from '$lib/store/appstore.js';
-  import { formatPrice, symbol } from '$lib';
-  import PageTitle from '$lib/ui/page-title.svelte';
-  
+  import { formatPrice } from '$lib';
+  import PageTitle from '$lib/ui/PageTitle.svelte';
+  import Button from '$lib/ui/Button.svelte';
+    import TotalAmount from '$lib/ui/TotalAmount.svelte';
+
   function onRemoveFromCart(id: string) {
     const newCarts = $carts.filter((v) => v.id !== id);
     carts.set(newCarts);
@@ -36,61 +38,51 @@
     <tbody>
       {#each $carts as cart}
         <tr>
-          <td class={`w-40`}>{cart.product.id}</td>
+          <td class="id">{cart.product.id}</td>
           <td>{cart.product.name}</td>
-          <td class={`w-32 text-right`}>{formatPrice(cart.product.price)}</td>
-          <td class={`w-24 text-right`}>
+          <td class="right">{formatPrice(cart.product.price)}</td>
+          <td class="right">
             <input
-              class="text-right px-1 border border-gray-300 rounded-md inset-shadow-lg"
               type="number"
               min="1" max="10"
               bind:value={cart.quantity}
             />
           </td>
-          <td class={`çw-1`}>
-            <button
-              class="cursor-pointer text-nowrap rounded-md px-2 py-0.5 text-sm font-bold shadow hover:shadow-md disabled:bg-gray-200 disabled:text-gray-400 disabled:shadow-none disabled:cursor-auto"
+          <td>
+            <Button
+              type="cart"
+              label="Remove"
               onclick={() => onRemoveFromCart(cart.id)}
-            >
-              Remove
-            </button>
+            />
           </td>
         </tr>
       {/each}
     </tbody>
   </table>
-  <div class="flex justify-between items-center mt-2">
-    <p>
-      Total amount:<span class="pl-3 text-lg font-bold">
-        {symbol}
-        {$carts
+  <div>
+    <TotalAmount
+      amount={
+        $carts
         .map((v) => v.product.price * v.quantity)
         .reduce((a, b) => a + b, 0)
-        .toLocaleString()}
-        -</span>
-    </p>
-    <div class="mt-5">
-      <button
-        class="submit"
+      }
+    />
+    <div>
+      <Button
+        type="submit"
         onclick={sendOrder}
-      >
-        Submit Order
-      </button>
+        label="Submit Order"
+      />
     </div>
   </div>
 {/if}
 
 <style lang="scss">
-  button.submit {
-    font-size: 0.84rem;
-    font-weight: 700; 
-    background-color: #ea0;
-    padding: 2px 8px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
-    &:hover {
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
-    }
+  input[type="number"] {
+    text-align: right;
+    padding: 4px 0 4px 4px;
+    border: var(--main-border);
+    border-radius: 6px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
   }
 </style>

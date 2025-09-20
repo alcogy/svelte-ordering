@@ -1,14 +1,28 @@
-@import 'tailwindcss';
-
+:root {
+  --main-bg-color: #f2f2f2;
+  --page-width: 1080px;
+  --main-border: 1px solid #ccc;
+}
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: var(--main-bg-color);
+}
 table.main-table {
   border-collapse: collapse;
   width: 100%;
 }
 table.main-table thead th {
   padding: 16px 32px;
-  background-color: #e1e2e5;
+  background-color: #e5e7e9;
   text-align: left;
-  border-bottom: 1px solid #bbb;
+  border-bottom: var(--main-border);
 }
 table.main-table thead th:first-of-type {
   border-radius: 8px 0 0 0;
@@ -17,7 +31,14 @@ table.main-table thead th:last-of-type {
   border-radius: 0 8px 0 0;
 }
 table.main-table tbody td {
-  border-bottom: 1px solid #ccc;
+  border-bottom: var(--main-border);
   padding: 16px 32px;
   text-align: left;
+}
+
+table.main-table tbody td.id {
+  width: 180px;
+}
+table.main-table tbody td.right {
+  text-align: right;
 }

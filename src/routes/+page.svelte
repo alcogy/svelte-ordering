@@ -1,9 +1,10 @@
 <script lang="ts">
   import { carts } from '$lib/store/appstore.js';
-  import { type Product, cell } from '$lib/shared.js';
+  import { type Product } from '$lib/shared.js';
   import { v4 } from 'uuid';
-  import PageTitle from '$lib/ui/page-title.svelte';
+  import PageTitle from '$lib/ui/PageTitle.svelte';
   import { formatPrice } from '$lib';
+  import Button from '$lib/ui/Button.svelte';
 
   let { data } = $props();
   let products = $state(data['products'] || []);
@@ -47,38 +48,14 @@
         <td>{product.manufacturer}</td>
         <td class="w-32 text-right">{formatPrice(product.price)}</td>
         <td class="w-1">
-          <button
-            class="add-cart"
+          <Button
+            label="Add cart"
             onclick={() => onAddToCart(product)}
             disabled={$carts.map((v) => v.product.id).includes(product.id)}
-          >
-            Add to cart
-          </button>
+            type="cart"
+          />
         </td>
       </tr>
     {/each}
   </tbody>
 </table>
-
-<style lang="scss">
-  button.add-cart {
-    white-space: nowrap;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-    padding: 2px 5px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    color: #444;
-    font-weight: 500;
-    
-    &:not(:disabled):hover {
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    &:disabled {
-      background-color: #ddd;
-      box-shadow: none;
-      color: #777;
-      
-    }
-  }
-</style>

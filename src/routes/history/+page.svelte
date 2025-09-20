@@ -1,6 +1,6 @@
 <script lang="ts">
   import { symbol } from '$lib';
-  import PageTitle from '$lib/ui/page-title.svelte';
+  import PageTitle from '$lib/ui/PageTitle.svelte';
 
   let { data } = $props();
   const histories = data['histories'];
@@ -22,7 +22,7 @@
     <tbody>
       {#each histories as history}
         <tr>
-          <td class="w-40">
+          <td class="id">
             <a href={'./history/' + history.id} class="text-blue-500 underline">
               {history.id}
             </a>
@@ -31,7 +31,7 @@
             {new Date(history.ordered_date as string).toLocaleDateString()}
             {new Date(history.ordered_date as string).toLocaleTimeString()}
           </td>
-          <td class="w-32 text-right text-nowrap">
+          <td class="right">
             {symbol} {Number(history.amount).toLocaleString()}-
           </td>
         </tr>

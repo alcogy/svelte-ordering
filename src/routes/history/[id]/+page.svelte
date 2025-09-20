@@ -1,6 +1,7 @@
 <script lang="ts">
   import { formatPrice } from '$lib';
-  import PageTitle from '$lib/ui/page-title.svelte';
+  import PageTitle from '$lib/ui/PageTitle.svelte';
+    import TotalAmount from '$lib/ui/TotalAmount.svelte';
   
   let { data } = $props();
   const particulars = data['data'];
@@ -34,13 +35,13 @@
     </tbody>
   </table>
   <div class="mt-3">
-    <p>
-      Total amount:<span class="pl-3 text-lg font-bold">{
-        formatPrice(particulars
+    <TotalAmount
+      amount={
+        particulars
         .map((v) => (v.product?.price || 0) * v.particular.quantity)
-        .reduce((a, b) => a + b, 0))
-      }</span>
-    </p>
+        .reduce((a, b) => a + b, 0)
+      } 
+    />
   </div>
 {/if}
 <p class="mt-5">
