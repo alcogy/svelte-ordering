@@ -28,6 +28,9 @@ test('Add Cart and Remove Cart', async ({ page }) => {
 });
 
 test('Order', async ({ page }) => {
+  await page.goto('/history');
+  const prevRow = await page.locator('table tbody tr').count();
+  
   await page.goto('/');
   await page.getByRole('row', { name: 'Tape Koku € 480 - Add cart' }).getByRole('button').click();
   await page.getByRole('row', { name: '2 Pencil sharpener Stead €' }).getByRole('button').click();
@@ -38,4 +41,5 @@ test('Order', async ({ page }) => {
   await page.getByRole('button', { name: 'Submit Order' }).click();
   await page.getByRole('link', { name: 'Order History' }).click();
 
+  await expect(await page.locator('table tbody tr').count()).toBe(prevRow + 1);
 });
