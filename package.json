@@ -1,5 +1,5 @@
 {
-	"name": "tiny-ordering",
+	"name": "svelte-ordering",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -34,7 +34,7 @@
 		"drizzle-kit": "^0.30.6",
 		"eslint": "^9.36.0",
 		"eslint-config-prettier": "^10.1.8",
-		"eslint-plugin-svelte": "^3.12.3",
+		"eslint-plugin-svelte": "^3.12.4",
 		"globals": "^16.4.0",
 		"jsdom": "^27.0.0",
 		"prettier": "^3.6.2",

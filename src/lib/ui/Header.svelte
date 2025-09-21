@@ -9,7 +9,7 @@
 <header>
   <div>
     <h1>
-			<a href="/">Tiny Ordering</a>
+			<a href="/">Svelte Ordering</a>
 		</h1>
     <ul>
       {#each links as link}

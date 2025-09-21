@@ -11,7 +11,7 @@ test('Button Render', async () => {
 		type: 'submit',
 	});
 
-	const button = screen.getByRole('button', { name: "Hello" });
+	const button = screen.getByRole('button', { name: "Hello" }) as HTMLButtonElement;
 	expect(button).not.toBeNull();
 });
 
@@ -27,7 +27,22 @@ test('Button Click', async () => {
 		type: 'submit',
 	});
 
-	const button = screen.getByRole('button', { name: "Hello" });
+	const button = screen.getByRole('button', { name: "Hello" }) as HTMLButtonElement;
 	await user.click(button);
 	expect(button.innerText).toBe("World");
+});
+
+test('Button Disabled', async () => {
+	render(Button, {
+		label: "Hello",
+		onclick: () => {
+			const btn = document.querySelector('button');
+			if (btn) btn.innerText = "World";
+		},
+		disabled: true,
+		type: 'submit',
+	});
+
+	const button = screen.getByRole('button', { name: "Hello" }) as HTMLButtonElement;
+	expect(button.disabled).toBe(true);
 });
