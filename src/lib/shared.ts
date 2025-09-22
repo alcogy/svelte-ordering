@@ -9,5 +9,3 @@ export interface Cart {
   product: Product;
   quantity: number;
 }
-
-export const cell = 'border-t border-gray-300 py-4 px-5 text-left';
