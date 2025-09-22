@@ -25,16 +25,16 @@
     <tbody>
       {#each particulars as pt}
         <tr>
-          <td class="w-40">{pt.product?.id}</td>
+          <td class="id">{pt.product?.id}</td>
           <td>{pt.product?.name}</td>
           <td>{pt.product?.manufacturer}</td>
-          <td class="w-32 text-right">{formatPrice(pt.product?.price || 0)}</td>
-          <td class="w-32 text-right">{pt.particular.quantity}</td>
+          <td class="right">{formatPrice(pt.product?.price || 0)}</td>
+          <td class="right">{pt.particular.quantity}</td>
         </tr>
       {/each}
     </tbody>
   </table>
-  <div class="mt-3">
+  <div>
     <TotalAmount
       amount={
         particulars
@@ -44,8 +44,14 @@
     />
   </div>
 {/if}
-<p class="mt-5">
+<p class="back-link">
   <a href="/history" class="text-blue-500 underline hover:text-blue-400">
     Bock to histories
   </a>
 </p>
+
+<style lang="scss">
+  .back-link {
+    margin-top: 24px;
+  }
+</style>

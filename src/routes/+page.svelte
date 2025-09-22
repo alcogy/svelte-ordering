@@ -5,9 +5,12 @@
   import PageTitle from '$lib/ui/PageTitle.svelte';
   import { formatPrice } from '$lib';
   import Button from '$lib/ui/Button.svelte';
+  import SearchText from '$lib/ui/SearchText.svelte';
 
   let { data } = $props();
   let products = $state(data['products'] || []);
+  let searchText = $state("");
+  let searchedProducts = $derived(products.filter((v) => searchText === "" || (v.manufacturer.includes(searchText) || v.name.includes(searchText))));
   
   function onAddToCart(product: Product) {
     const newCarts = [...$carts];
@@ -18,10 +21,10 @@
     });
     carts.set(newCarts);
   }
-
 </script>
 
 <PageTitle label="Product list" />
+<SearchText bind:value={searchText} />
 <table class="main-table">
   <thead>
     <tr>
@@ -41,13 +44,13 @@
     </tr>
   </thead>
   <tbody>
-    {#each products as product}
+    {#each searchedProducts as product}
       <tr>
-        <td class="w-40">{product.id}</td>
+        <td class="id">{product.id}</td>
         <td>{product.name}</td>
         <td>{product.manufacturer}</td>
-        <td class="w-32 text-right">{formatPrice(product.price)}</td>
-        <td class="w-1">
+        <td class="right">{formatPrice(product.price)}</td>
+        <td>
           <Button
             label="Add cart"
             onclick={() => onAddToCart(product)}
