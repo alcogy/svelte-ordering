@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { symbol } from '$lib';
+  import { formatPrice } from '$lib';
   import PageTitle from '$lib/ui/PageTitle.svelte';
 
   let { data } = $props();
@@ -32,7 +32,7 @@
             {new Date(history.ordered_date as string).toLocaleTimeString()}
           </td>
           <td class="right">
-            {symbol} {Number(history.amount).toLocaleString()}-
+            {formatPrice(Number(history.amount))}
           </td>
         </tr>
       {/each}

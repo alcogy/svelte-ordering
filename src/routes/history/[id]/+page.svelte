@@ -1,10 +1,27 @@
 <script lang="ts">
   import { formatPrice } from '$lib';
+  import { carts } from '$lib/store/appstore.js';
+  import { v4 } from 'uuid';
   import PageTitle from '$lib/ui/PageTitle.svelte';
-    import TotalAmount from '$lib/ui/TotalAmount.svelte';
-  
+  import TotalAmount from '$lib/ui/TotalAmount.svelte';
+  import type { Cart } from '$lib/shared.js';
+  import Button from '$lib/ui/Button.svelte';
+
   let { data } = $props();
   const particulars = data['data'];
+
+  function repeatBuy() {
+    const newCarts: Cart[] = [];
+    for (const pt of particulars) {
+      if (pt.product === null) continue;
+      newCarts.push({
+        id: v4(),
+        product: pt.product,
+        quantity: pt.particular.quantity,
+      });
+      carts.set(newCarts);
+    }
+  }
 </script>
 
 <PageTitle label="Order detail" />
@@ -44,6 +61,9 @@
     />
   </div>
 {/if}
+<div>
+  <Button onclick={repeatBuy} label="Repeat buy" type="submit" />
+</div>
 <p class="back-link">
   <a href="/history" class="text-blue-500 underline hover:text-blue-400">
     Bock to histories

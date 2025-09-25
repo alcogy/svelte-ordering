@@ -4,6 +4,8 @@
     { path: '/cart', label: 'Cart' },
     { path: '/history', label: 'Order History' },
   ]
+	import { carts } from '$lib/store/appstore.js';
+  import Badge from './Badge.svelte';
 </script>
 
 <header>
@@ -15,6 +17,9 @@
       {#each links as link}
       <li>
         <a href="{link.path}">{link.label}</a>
+				{#if link.label === 'Cart'}
+				<Badge size={$carts.length} />
+				{/if}
       </li>
       {/each}
     </ul>
@@ -50,7 +55,9 @@
 		list-style: none;
 		display: flex;
 		gap: 24px;
-		& li a {
+		& li {
+			position: relative;
+			& a {
 			text-decoration: none;
 			font-weight: 500;
 			color: #444;
@@ -58,5 +65,6 @@
 				opacity: 0.7;	
 			}
 		}
+		} 
 	}
 </style>
