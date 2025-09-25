@@ -9,19 +9,19 @@
 </script>
 
 <header>
-  <div>
-    <h1>
+	<div>
+		<h1>
 			<a href="/">Svelte Ordering</a>
 		</h1>
-    <ul>
-      {#each links as link}
+		<ul>
+    	{#each links as link}
       <li>
         <a href="{link.path}">{link.label}</a>
 				{#if link.label === 'Cart'}
 				<Badge size={$carts.length} />
 				{/if}
-      </li>
-      {/each}
+			</li>
+			{/each}
     </ul>
   </div>
 </header>

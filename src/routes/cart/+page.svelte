@@ -18,6 +18,11 @@
     });
     carts.set([]);
   }
+
+  function resetCart() {
+    if (!confirm('Do you want reset?')) return;
+    carts.set([]);
+  }
 </script>
 
 <PageTitle label="Cart" />
@@ -67,11 +72,16 @@
         .reduce((a, b) => a + b, 0)
       }
     />
-    <div>
+    <div class="btn-wrap">
       <Button
         type="submit"
         onclick={sendOrder}
         label="Submit Order"
+      />
+      <Button
+        type="cart"
+        onclick={resetCart}
+        label="Reset cart"
       />
     </div>
   </div>
@@ -84,5 +94,9 @@
     border: var(--main-border);
     border-radius: 6px;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .btn-wrap {
+    display: flex;
+    justify-content: space-between;
   }
 </style>
