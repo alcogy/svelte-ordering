@@ -3,7 +3,9 @@
   import { formatPrice } from '$lib';
   import PageTitle from '$lib/ui/PageTitle.svelte';
   import Button from '$lib/ui/Button.svelte';
-    import TotalAmount from '$lib/ui/TotalAmount.svelte';
+  import TotalAmount from '$lib/ui/TotalAmount.svelte';
+
+  let hasError = $derived($carts.find((v) => v.quantity === 0) !== undefined);
 
   function onRemoveFromCart(id: string) {
     const newCarts = $carts.filter((v) => v.id !== id);
@@ -77,6 +79,7 @@
         type="submit"
         onclick={sendOrder}
         label="Submit Order"
+        disabled={hasError}
       />
       <Button
         type="cart"
